@@ -1,0 +1,175 @@
+import React, { useState } from 'react';
+import { 
+  Star, 
+  MessageSquare, 
+  MapPin, 
+  Share2, 
+  Globe, 
+  Lightbulb, 
+  Target, 
+  AlertCircle,
+  MessageCircle
+} from 'lucide-react';
+
+const services = [
+  {
+    id: 1,
+    title: "Reputation Management",
+    icon: <Star className="w-5 h-5" />,
+    color: "bg-yellow-500",
+    what: "Software that monitors, manages, and generates online reviews from one dashboard. It uses AI to instantly craft personalized responses to reviews and automatically sends SMS or email requests to recent customers asking for new reviews.",
+    problem: "98% of people read online reviews, and most won't use a business with less than a 4-star rating. Business owners want more reviews but are too busy to ask every customer, and they don't have the time to type out responses to the feedback they do get.",
+    pitch: "\"If a customer searches for you and your competitor, they are going to pick the one with the most recent 5-star reviews. We automate your review requests via text message—which has a 98% open rate—and use AI to instantly reply to your feedback so you look like a highly responsive, top-tier business. It saves you hours a week and drives new customers to your door.\""
+  },
+  {
+    id: 2,
+    title: "AI Receptionist & Web Chat",
+    icon: <MessageSquare className="w-5 h-5" />,
+    color: "bg-blue-500",
+    what: "A 24/7 AI-powered employee that lives on the client's website (via web chat) and their phone line. It answers FAQs, captures lead contact info, texts back missed calls automatically, and books appointments directly into their calendar.",
+    problem: "The average business takes 42 hours to respond to a lead, but calling back within 5 minutes makes a sale infinitely more likely. Furthermore, 80% of callers won't leave a voicemail; if a business misses a call because they are busy on a job, that lead instantly calls their competitor.",
+    pitch: "\"Every missed call is a missed paycheck. Our AI receptionist answers the phone and your website chats 24/7, answering questions and booking appointments while you sleep or while you are busy on a job site. It even texts back people who hang up before you can answer. Your website should act like your best salesperson, not a static brochure.\""
+  },
+  {
+    id: 3,
+    title: "Local SEO & Listings",
+    icon: <MapPin className="w-5 h-5" />,
+    color: "bg-red-500",
+    what: "A tool that instantly syncs a business's Name, Address, and Phone number (NAP), along with their hours and services, across dozens of key online directories (Google Business Profile, Facebook, Apple Maps, Yelp, Bing, etc.) from one central dashboard.",
+    problem: "62% of consumers will disregard a business if they can't find them easily online. If a business has inconsistent addresses or old phone numbers floating around the internet, Google's algorithm penalizes them, pushing them down in local search rankings.",
+    pitch: "\"If they can't find you, they can't choose you. You don't have the time to log into 50 different websites to update your holiday hours. We act as your digital landlord, locking in your accurate information across the entire web so you dominate local search rankings and build immediate trust with Google and your customers.\""
+  },
+  {
+    id: 4,
+    title: "Social Media Management",
+    icon: <Share2 className="w-5 h-5" />,
+    color: "bg-purple-500",
+    what: "A platform to plan, schedule, and publish posts across all major social networks (Facebook, Instagram, LinkedIn, Google Business Profile, X/Twitter) from one place. It uses AI to generate captions and images from a single prompt.",
+    problem: "Business owners know they need to be active on social media to build trust, but they lack the time, creativity, and consistency to post regularly.",
+    pitch: "\"Social media is an appetizer; if prospects like what they see, they go to your website for the main course. We take the headache out of content creation by setting up automated, AI-generated campaigns that keep your brand top-of-mind without you lifting a finger. You focus on your business; we make sure you look like an active, thriving industry leader online.\""
+  },
+  {
+    id: 5,
+    title: "Website Hosting & Design",
+    icon: <Globe className="w-5 h-5" />,
+    color: "bg-emerald-500",
+    what: "Fast, secure, and mobile-friendly WordPress website creation and hosting, backed by enterprise-grade cloud infrastructure.",
+    problem: "A slow or ugly website acts like a leaky bucket, losing the traffic and leads that other marketing efforts bring in. Owners often overpay for clunky sites they can't edit themselves.",
+    pitch: "\"Your website is your digital storefront. If it's slow or hard to navigate on a phone, customers bounce. We build clean, high-converting websites optimized for search engines that are designed to do one thing: turn your visitors into paying customers.\""
+  }
+];
+
+export default function SalesDashboard() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const activeService = services[activeTab];
+
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 font-sans text-slate-800">
+      
+      {/* Sidebar Navigation */}
+      <aside className="w-full md:w-80 bg-white border-r border-slate-200 shadow-sm flex flex-col">
+        <div className="p-6 border-b border-slate-100">
+          <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <Target className="w-6 h-6 text-blue-600" />
+            Core Services
+          </h1>
+          <p className="text-sm text-slate-500 mt-1">Interactive Rep Training</p>
+        </div>
+        
+        <nav className="flex-1 overflow-y-auto p-4 space-y-2">
+          {services.map((service, index) => (
+            <button
+              key={service.id}
+              onClick={() => setActiveTab(index)}
+              className={`w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 transition-all duration-200 ${
+                activeTab === index 
+                  ? "bg-slate-900 text-white shadow-md" 
+                  : "hover:bg-slate-100 text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <div className={`p-1.5 rounded-lg ${activeTab === index ? "bg-white/20" : service.color + " text-white"}`}>
+                {service.icon}
+              </div>
+              <span className="font-medium text-sm">{service.title}</span>
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      {/* Main Content Area */}
+      <main className="flex-1 flex flex-col h-screen overflow-y-auto">
+        <div className="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full">
+          
+          {/* Header */}
+          <header className="mb-8 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-semibold mb-4 border border-slate-200">
+              Service Overview
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
+              {activeService.title}
+            </h2>
+          </header>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            
+            {/* What it is Card */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-2 mb-4">
+                <Target className="w-5 h-5 text-blue-500" />
+                <h3 className="text-lg font-bold text-slate-900">What it is</h3>
+              </div>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                {activeService.what}
+              </p>
+            </div>
+
+            {/* The Problem Card */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-2 mb-4">
+                <AlertCircle className="w-5 h-5 text-red-500" />
+                <h3 className="text-lg font-bold text-slate-900">The Problem it Solves</h3>
+              </div>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                {activeService.problem}
+              </p>
+            </div>
+          </div>
+
+          {/* The Pitch Card (Full Width) */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 md:p-8 shadow-sm border border-blue-100 mb-10">
+            <div className="flex items-center gap-2 mb-4">
+              <MessageCircle className="w-6 h-6 text-blue-600" />
+              <h3 className="text-xl font-bold text-blue-900">How to Position / Pitch it</h3>
+            </div>
+            <div className="bg-white rounded-xl p-5 md:p-6 shadow-sm border border-blue-50 relative">
+              <div className="absolute -left-3 -top-3 text-4xl text-blue-200 font-serif">"</div>
+              <p className="text-slate-700 text-lg italic leading-relaxed relative z-10 font-medium">
+                {activeService.pitch.replace(/"/g, '')}
+              </p>
+              <div className="absolute -right-3 -bottom-5 text-4xl text-blue-200 font-serif">"</div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Sticky Footer Quick Tip */}
+        <div className="bg-slate-900 text-white p-6 mt-auto">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-4 items-start md:items-center">
+            <div className="bg-yellow-500 p-3 rounded-full shrink-0">
+              <Lightbulb className="w-6 h-6 text-slate-900" />
+            </div>
+            <div>
+              <h4 className="font-bold text-yellow-400 text-lg mb-1">Sales Rep Quick-Tip: Never lead with a feature dump!</h4>
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed">
+                Always ask Discovery questions first to uncover the pain (e.g., <span className="italic text-white">"Are you manually replying to every review?"</span> or <span className="italic text-white">"Do you find your front desk is overwhelmed with the same 5 questions every day?"</span>). Once the client admits the pain, introduce the specific service above as the exact cure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    </div>
+  );
+}
